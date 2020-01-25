@@ -1,5 +1,5 @@
 /* example using https://github.com/dougmoscrop/serverless-http */
-//import '@babel/polyfill';
+// import '@babel/polyfill';
 import serverless from 'serverless-http';
 import expressApp from './app';
 

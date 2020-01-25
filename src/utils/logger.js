@@ -6,7 +6,7 @@ export default function customLogger(tokens, req, res) {
     tokens.res(req, res, 'content-length'),
     '-',
     tokens['response-time'](req, res),
-    'ms'
+    'ms',
   ].join(' ');
 
   if (process.env.NODE_ENV !== 'dev') {

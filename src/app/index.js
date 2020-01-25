@@ -11,7 +11,6 @@ import router from '../routes';
 const expressSanitizer = require('express-sanitizer');
 // const basicAuth = require('express-basic-auth');
 
-
 /* My express App */
 export default function expressApp() {
   const app = express();
@@ -38,12 +37,12 @@ export default function expressApp() {
     err.status = 404;
     next(err);
   });
-  //Handle Error here.
+  // Handle Error here.
   app.use(function(err, req, res, next) {
     res.locals.message = err.message;
     console.error('error is ', err);
     const status = err.status || 500;
-    return res.json({ success: false, status: status, message: err.message });
+    return res.json({ success: false, status, message: err.message });
   });
 
   return app;

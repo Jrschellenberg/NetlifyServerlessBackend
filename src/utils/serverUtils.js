@@ -22,19 +22,21 @@ class ServerUtils {
 
   getRoutePath() {
     // Set router base path for local dev
-    return process.env.DEV_ENV === 'true' ? `/${this.serverName}` : `/.netlify/functions/${this.serverName}/`;
+    return process.env.DEV_ENV === 'true'
+      ? `/${this.serverName}`
+      : `/.netlify/functions/${this.serverName}/`;
   }
 
   throwError(status, message, next) {
-    let err = new Error(message);
+    const err = new Error(message);
     err.status = status;
     return next(err);
   }
 
   rejectError(status, message) {
-    let rejectError = {
-      status: status,
-      message: message
+    const rejectError = {
+      status,
+      message,
     };
     return rejectError;
   }
@@ -47,4 +49,4 @@ class ServerUtils {
 }
 
 const instance = new ServerUtils();
-export default instance; //Singleton pattern. only exposing this one instance.
+export default instance; // Singleton pattern. only exposing this one instance.
