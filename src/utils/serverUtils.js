@@ -5,19 +5,9 @@ class ServerUtils {
     if (!ServerUtils.instance) {
       // if an instance does not exist
       this.serverName = process.env.EXPRESS_BASE_API_NAME;
-      this.publicKey = process.env.ENCRYPTION_PUBLIC_KEY;
-      this.secretKey = process.env.ENCRYPTION_SECRET_KEY;
       ServerUtils.instance = this;
     }
     return ServerUtils.instance;
-  }
-
-  getSecretKey() {
-    return this.secretKey;
-  }
-
-  getPublicKey() {
-    return this.publicKey;
   }
 
   getRoutePath() {

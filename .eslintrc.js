@@ -150,6 +150,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-props-no-spreading": "off",
     "no-multi-assign": "off",
+    "class-methods-use-this": "off",
   },
   "plugins": [
     "prettier",
@@ -159,7 +160,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
-          ['@Product', './modules/product'],
+
         ],
         extensions: ['.ts', '.js', '.jsx', '.json']
       }
