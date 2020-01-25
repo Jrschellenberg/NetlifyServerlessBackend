@@ -7,7 +7,7 @@
     "start:lambda": "cross-env DEV_ENV=true netlify-lambda serve src",
     "build": "run-p build:**",
     "build:lambda": "netlify-lambda build src",
-    "lint": "eslint ./ --ext .jsx"
+    "lint": "eslint ./src"
   },
   "peerDependencies": {
     "babel-eslint": "^9.0.0",

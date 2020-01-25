@@ -152,7 +152,6 @@ module.exports = {
     "no-multi-assign": "off",
   },
   "plugins": [
-    "html",
     "prettier",
     "react-hooks"
   ],
