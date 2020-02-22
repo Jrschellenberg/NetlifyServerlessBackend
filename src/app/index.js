@@ -4,19 +4,44 @@ import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import compression from 'compression';
-import customLogger from '../utils/logger';
-import ServerUtils from '../utils/serverUtils';
+import expressSanitizer from 'express-sanitizer';
+import rateLimit from 'express-rate-limit';
+import {Environment, CustomLogger} from '../utils';
+
 import router from '../routes';
 
-const expressSanitizer = require('express-sanitizer');
-// const basicAuth = require('express-basic-auth');
+
 
 /* My express App */
 export default function expressApp() {
   const app = express();
 
+  if(Environment.isDevelopment()){
+    app.use(cors());
+  }
+  else {
+    const whitelist = Environment.getValidWhiteListDomains();
+    const corsOptions = {
+      origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+          callback(null, true)
+        } else {
+          callback(new Error('Not allowed by CORS'))
+        }
+      }
+    };
+    app.use(cors(corsOptions)); // Server lock with Cors.
+
+    const limiter = rateLimit({
+      windowMs: Environment.getRateLimitInSeconds(),
+      max: Environment.getRateLimitMax(),
+    });
+    //  apply to all requests
+    app.use(limiter);
+  }
+
   // Apply express middlewares
-  app.use(cors());
+
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(expressSanitizer());
@@ -26,10 +51,10 @@ export default function expressApp() {
   app.use(compression());
 
   // Attach logger
-  app.use(morgan(customLogger));
+  app.use(morgan(CustomLogger));
 
   // Setup routes
-  app.use(ServerUtils.getRoutePath(), router);
+  app.use(Environment.getRoutePath(), router);
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
