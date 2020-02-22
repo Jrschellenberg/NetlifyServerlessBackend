@@ -6,29 +6,26 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import expressSanitizer from 'express-sanitizer';
 import rateLimit from 'express-rate-limit';
-import {Environment, CustomLogger} from '../utils';
+import { Environment, CustomLogger } from '../utils';
 
 import router from '../routes';
-
-
 
 /* My express App */
 export default function expressApp() {
   const app = express();
 
-  if(Environment.isDevelopment()){
+  if (Environment.isDevelopment()) {
     app.use(cors());
-  }
-  else {
+  } else {
     const whitelist = Environment.getValidWhiteListDomains();
     const corsOptions = {
-      origin: function (origin, callback) {
+      origin(origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
-          callback(null, true)
+          callback(null, true);
         } else {
-          callback(new Error('Not allowed by CORS'))
+          callback(new Error('Not allowed by CORS'));
         }
-      }
+      },
     };
     app.use(cors(corsOptions)); // Server lock with Cors.
 
