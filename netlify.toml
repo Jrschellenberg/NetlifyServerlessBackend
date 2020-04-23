@@ -2,6 +2,7 @@
   Command = "npm run build"
   Functions = "lambda"
   Publish = "public"
+  environment = { NODE_VERSION = "12.13.1" }
 
 [[headers]]
   for = "/*"
