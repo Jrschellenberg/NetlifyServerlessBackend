@@ -1,6 +1,6 @@
-# Personal Website Backend
+# Netlify Serverless Website Backend
 
-### Serverless Netlify function used to proxy requests on behalf of frontend.
+### Serverless Netlify function used to proxy requests
 
 ## Prerequisites
 - Node V12.x.x 
@@ -11,7 +11,7 @@
 - Copy `.env.example` --> `.env`
 - `yarn`
 - `yarn start`
-- Go to `http://localhost:9000` Should see a JSON response of hello world!
+- Go to `http://localhost:9000/server/` Should see a JSON response of hello world!
 
 
 ## Deployment
