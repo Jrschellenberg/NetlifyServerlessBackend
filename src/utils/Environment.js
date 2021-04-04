@@ -2,7 +2,7 @@ require('dotenv').config();
 
 class Environment {
   constructor() {
-    this.devEnvironment = process.env.DEV_ENV === 'true';
+    this.devEnvironment = process.env.NODE_ENV !== 'production';
     this.serverName = process.env.EXPRESS_BASE_API_NAME;
     this.whiteListedDomains = process.env.CORS_VALID_DOMAINS?.split(',');
     this.rateLimitMax = process.env.RATE_LIMIT_MAX;
@@ -28,8 +28,8 @@ class Environment {
   getRoutePath() {
     // Set router base path for local dev
     return this.isDevelopment()
-      ? `/${this.serverName}`
-      : `/.netlify/functions/${this.serverName}/`;
+        ? `/${this.serverName}`
+        : `/.netlify/functions/${this.serverName}/`;
   }
 }
 
